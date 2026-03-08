@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { WebSocketProvider, useWebSocket } from "./context/WebSocketContext";
+import { WebSocketProvider } from "./context/WebSocketContext";
 import { getFavorites, toggleFavorite } from "./lib/favorites";
 import { ProductListView } from "./components/ProductListView";
 import { ProductDetailView } from "./components/ProductDetailView";

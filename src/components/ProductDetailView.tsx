@@ -1,6 +1,5 @@
 import { useCallback } from "react";
 import { getSymbolName } from "../constants/symbols";
-import { getFavorites, toggleFavorite } from "../lib/favorites";
 import { useTicker } from "../hooks/useTicker";
 import { useOrderbook } from "../hooks/useOrderbook";
 import { useTrades } from "../hooks/useTrades";

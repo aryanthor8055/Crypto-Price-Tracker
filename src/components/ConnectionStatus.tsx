@@ -9,7 +9,6 @@ const labels: Record<ConnectionStatus, string> = {
 
 export function ConnectionStatus() {
   const { status } = useWebSocket();
-  const isConnected = status === "connected";
 
   return (
     <div className="connection-status" data-status={status}>

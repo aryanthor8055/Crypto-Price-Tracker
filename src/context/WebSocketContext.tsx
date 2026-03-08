@@ -67,9 +67,9 @@ export function WebSocketProvider({ children }: { children: ReactNode }) {
 
     ws.onmessage = (event) => {
       try {
-        const data = JSON.parse(event.data) as WsMessage;
-        if (data.type === "subscriptions") return; // ack, ignore
-        handlersRef.current.forEach((h) => h(data));
+        const data = JSON.parse(event.data) as unknown;
+        if (typeof data === "object" && data !== null && "type" in data && (data as { type: string }).type === "subscriptions") return;
+        handlersRef.current.forEach((h) => h(data as WsMessage));
       } catch {
         // ignore parse errors
       }
