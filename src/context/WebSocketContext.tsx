@@ -9,7 +9,8 @@ import {
 } from "react";
 import type { WsMessage } from "../types/ws";
 
-const WS_URL = "ws://localhost:8080";
+// Set VITE_WS_URL in production to your deployed WebSocket server (e.g. wss://your-server.railway.app)
+const WS_URL = import.meta.env.VITE_WS_URL || "ws://localhost:8080";
 
 export type ConnectionStatus = "connecting" | "connected" | "disconnected" | "error";
 
