@@ -43,44 +43,6 @@ npm start
 
 Then open http://localhost:5173 (or the URL Vite prints). Ensure the mock server is running first.
 
-## Deployment
-
-### Frontend only (static)
-
-Deploy the built app to any static host. The app will try to connect to `ws://localhost:8080` by default, so it will show "Disconnected" unless you also run the mock server locally or set a production WebSocket URL.
-
-**Vercel (recommended)**
-
-1. Push your repo to GitHub (you already have it).
-2. Go to [vercel.com](https://vercel.com) → Sign in with GitHub → **Add New Project** → Import `aryanthor8055/Crypto-Price-Tracker`.
-3. **Build and Output Settings:** Build Command `npm run build`, Output Directory `dist`, leave the rest default.
-4. **Deploy.** Your app will be at `https://your-project.vercel.app`.
-
-**Netlify**
-
-1. [netlify.com](https://netlify.com) → Add new site → Import from Git → choose the repo.
-2. Build command: `npm run build`, Publish directory: `dist`.
-3. Deploy.
-
-**Optional: use a production WebSocket URL**
-
-If you deploy the mock server somewhere (see below), set the env var when building the frontend:
-
-- **Vercel:** Project → Settings → Environment Variables → add `VITE_WS_URL` = `wss://your-ws-server.example.com`.
-- **Netlify:** Site settings → Environment variables → add `VITE_WS_URL` = `wss://...`.
-
-Redeploy the frontend so the build picks up the variable.
-
-### Mock server (optional, for a full live demo)
-
-To have live data on the deployed site, host the mock server somewhere that supports WebSockets and Node:
-
-- **Railway:** New project → Deploy from GitHub (clone [socket-custom-load](https://github.com/saxenanickk/socket-custom-load)) or use Railway’s “Deploy from repo”. Set start command to `node index.js`. Copy the public URL and use the **WebSocket** URL (e.g. `wss://your-app.railway.app`) as `VITE_WS_URL` for the frontend.
-- **Render:** New Web Service → connect the server repo, build `npm install`, start `node index.js`. Use the service URL as `VITE_WS_URL` (with `wss://` if Render serves WS on the same host).
-- **Fly.io:** `fly launch` in the server repo, then `fly deploy`. Use the app’s URL as `VITE_WS_URL`.
-
-After the server is deployed, set `VITE_WS_URL` in your frontend project and redeploy the frontend.
-
 ## Approach
 
 - **Single WebSocket connection** in a React context (`WebSocketContext`). Components subscribe/unsubscribe by channel and symbol; the context merges subscriptions and re-subscribes on reconnect.
